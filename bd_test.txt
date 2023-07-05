@@ -1,0 +1,262 @@
+create database loja
+go
+
+use loja
+
+create table produtos(
+idproduto int primary key identity,
+nome varchar (20),
+descricao varchar (30),
+preco decimal(10,2),
+quantidade_estoque int
+)
+
+go
+
+
+create table clientes(
+idcliente int identity,
+nome varchar (40),
+sexo char(1),
+email varchar (30),
+id_produto int
+)
+
+go
+
+alter table clientes 
+add constraint FK_CLIENTES_PRODUTO 
+foreign key (id_produto)
+references produtos (idproduto)
+go
+
+create table vendas(
+idvenda int primary key identity,
+data_da_venda date,
+id_cliente int,
+total_venda decimal (10,2)
+)
+go
+
+ALTER TABLE clientes
+ADD CONSTRAINT PK_clientes PRIMARY KEY (idcliente)
+go
+
+alter table vendas 
+add constraint FK_VENDAS_CLIENTE 
+foreign key (id_cliente)
+references clientes (idcliente)
+go
+
+create table endereco(
+idendereco int primary key identity, 
+bairro varchar(30),
+cidade varchar(20),
+uf char (2),
+id_cliente int 
+)
+go
+
+alter table endereco 
+add constraint FK_ENDERECO_CLIENTE 
+foreign key (id_cliente)
+references clientes (idcliente)
+go
+
+create table telefone(
+idtelefone int primary key identity,
+numero varchar(13),
+tipo varchar(3) check (tipo in('com', 'res', 'cel')),
+id_cliente int
+)
+go
+
+alter table telefone
+add constraint FK_TELEFONE_CLIENTE 
+foreign key (id_cliente)
+references clientes (idcliente)
+go
+
+INSERT INTO Produtos VALUES ('CANETA', 'CANETA ESFEROGRÁFICA AZUL', 1.50, 100)
+INSERT INTO Produtos VALUES ('CADERNO', 'CADERNO DE CAPA DURA 100 FOL', 7.99, 50)
+INSERT INTO Produtos VALUES ('LÁPIS', 'LÁPIS HB PRETO', 0.50, 200)
+INSERT INTO Produtos VALUES ('BORRACHA', 'BORRACHA BRANCA PEQUENA', 0.30, 150)
+INSERT INTO Produtos VALUES ('TESOURA', 'TESOURA DE PONTA REDONDA', 3.99, 30)
+INSERT INTO Produtos VALUES ('RÉGUA', 'RÉGUA DE PLÁSTICO 30CM', 1.20, 100)
+INSERT INTO Produtos VALUES ('AGENDA', 'AGENDA DIÁRIA COM CAPA FLOR', 12.99, 20)
+INSERT INTO Produtos VALUES ('COLA', 'COLA BASTÃO LAVÁVEL', 1.99, 80)
+INSERT INTO Produtos VALUES ('PASTA', 'PASTA PLÁSTICA COM ELÁSTICO', 2.50, 60)
+INSERT INTO Produtos VALUES ('APONTADOR', 'APONTADOR DE LÁPIS COM DEP', 0.99, 100)
+INSERT INTO Produtos VALUES ('BOLSA', 'BOLSA FEMININA DE COURO SINT', 49.99, 10)
+INSERT INTO Produtos VALUES ('RELÓGIO', 'RELÓGIO DE PULSO ANALÓGICO', 29.99, 15)
+INSERT INTO Produtos VALUES ('ÓCULOS DE SOL', 'ÓCULOS DE SOL ESTILO AVIA', 19.99, 25)
+INSERT INTO Produtos VALUES ('BOLSA TÉRMICA', 'BOLSA TÉRMICA PARA ALIMENTOS', 14.99, 40)
+INSERT INTO Produtos VALUES ('COPO', 'COPO DE VIDRO TRANSPARENTE', 2.99, 75)
+INSERT INTO Produtos VALUES ('CADEIRA', 'CADEIRA DE ESCRITÓRIO ERG', 99.99, 5)
+INSERT INTO Produtos VALUES ('TAPETE', 'TAPETE DECORATIVO PARA SALA', 39.99, 8)
+INSERT INTO Produtos VALUES ('PIJAMA', 'PIJAMA FEMININO DE ALGODÃO', 19.99, 12)
+INSERT INTO Produtos VALUES ('CHINELO', 'CHINELO DE BORRACHA UNISSEX', 7.99, 30)
+INSERT INTO Produtos VALUES ('VASO', 'VASO DE CERÂMICA PARA PLANT', 9.99, 25)
+go
+
+
+select * from produtos
+go
+
+INSERT INTO Clientes VALUES ('Maria Silva', 'F', 'maria.silva@example.com', 1)
+INSERT INTO Clientes VALUES ('João Santos', 'M', 'joao.santos@example.com', 2)
+INSERT INTO Clientes VALUES ('Ana Oliveira', 'F', 'ana.oliveira@example.com', 3)
+INSERT INTO Clientes VALUES ('Pedro Almeida', 'M', 'pedro.almeida@example.com', 4)
+INSERT INTO Clientes VALUES ('Mariana Costa', 'F', 'mariana.costa@example.com', 5)
+INSERT INTO Clientes VALUES ('José Pereira', 'M', 'jose.pereira@example.com', 6)
+INSERT INTO Clientes VALUES ('Carla Ferreira', 'F', 'carla.ferreira@example.com', 7)
+INSERT INTO Clientes VALUES ('Rafael Sousa', 'M', 'rafael.sousa@example.com', 8)
+INSERT INTO Clientes VALUES ('Lúcia Gomes', 'F', 'lucia.gomes@example.com', 9)
+INSERT INTO Clientes VALUES ('Fernando Santos', 'M', 'fernando.santos@example.com', 10)
+INSERT INTO Clientes VALUES ('Sara Rodrigues', 'F', 'sara.rodrigues@example.com', 1)
+INSERT INTO Clientes VALUES ('Gustavo Lima', 'M', 'gustavo.lima@example.com', 2)
+INSERT INTO Clientes VALUES ('Aline Alves', 'F', 'aline.alves@example.com', 3)
+INSERT INTO Clientes VALUES ('Ricardo Pereira', 'M', 'ricardo.pereira@example.com', 20)
+INSERT INTO Clientes VALUES ('Paula Fernandes', 'F', 'paula.fernandes@example.com', 5)
+INSERT INTO Clientes VALUES ('Rodrigo Costa', 'M', 'rodrigo.costa@example.com', 6)
+INSERT INTO Clientes VALUES ('Mariana Santos', 'F', 'mariana.santos@example.com', 12)
+INSERT INTO Clientes VALUES ('Daniel Oliveira', 'M', 'daniel.oliveira@example.com', 8)
+INSERT INTO Clientes VALUES ('Camila Ribeiro', 'F', 'camila.ribeiro@example.com', 9)
+INSERT INTO Clientes VALUES ('Bruno Carvalho', 'M', 'bruno.carvalho@example.com', 15)
+INSERT INTO Clientes VALUES ('Patrícia Lima', 'F', 'patricia.lima@example.com', 1)
+INSERT INTO Clientes VALUES ('Rafaela Fernandes', 'F', 'rafaela.fernandes@example.com', 2)
+INSERT INTO Clientes VALUES ('Leonardo Santos', 'M', 'leonardo.santos@example.com', 3)
+INSERT INTO Clientes VALUES ('Sandra Costa', 'F', 'sandra.costa@example.com', 4)
+INSERT INTO Clientes VALUES ('Lucas Silva', 'M', 'lucas.silva@example.com', 5)
+INSERT INTO Clientes VALUES ('Juliana Almeida', 'F', 'juliana.almeida@example.com', 6)
+INSERT INTO Clientes VALUES ('Marcos Oliveira', 'M', 'marcos.oliveira@example.com', 7)
+INSERT INTO Clientes VALUES ('Vivian Sousa', 'F', 'vivian.sousa@example.com', 8)
+INSERT INTO Clientes VALUES ('Raul Gomes', 'M', 'raul.gomes@example.com', 9)
+INSERT INTO Clientes VALUES ('Fátima Santos', 'F', 'fatima.santos@example.com', 10)
+INSERT INTO Clientes VALUES ('André Rodrigues', 'M', 'andre.rodrigues@example.com', 1)
+INSERT INTO Clientes VALUES ('Larissa Lima', 'F', 'larissa.lima@example.com', 2)
+INSERT INTO Clientes VALUES ('Renato Fernandes', 'M', 'renato.fernandes@example.com', 14)
+INSERT INTO Clientes VALUES ('Tatiana Costa', 'F', 'tatiana.costa@example.com', 4)
+INSERT INTO Clientes VALUES ('Marcelo Silva', 'M', 'marcelo.silva@example.com', 5)
+INSERT INTO Clientes VALUES ('Simone Almeida', 'F', 'simone.almeida@example.com', 6)
+INSERT INTO Clientes VALUES ('Gustavo Oliveira', 'M', 'gustavo.oliveira@example.com', 7)
+INSERT INTO Clientes VALUES ('Carolina Sousa', 'F', 'carolina.sousa@example.com', 8)
+INSERT INTO Clientes VALUES ('Ricardo Gomes', 'M', 'ricardo.gomes@example.com', 9)
+INSERT INTO Clientes VALUES ('Fernanda Santos', 'F', 'fernanda.santos@example.com', 10)
+INSERT INTO Clientes VALUES ('Alexandre Rodrigues', 'M', 'alexand.rodrigues@example.com', 16)
+INSERT INTO Clientes VALUES ('Patrícia Lima', 'F', 'patricia.lima@example.com', 2)
+INSERT INTO Clientes VALUES ('Eduardo Fernandes', 'M', 'eduardo.fernandes@example.com', 17)
+INSERT INTO Clientes VALUES ('Isabela Costa', 'F', 'isabela.costa@example.com', 4)
+INSERT INTO Clientes VALUES ('Lucas Silva', 'M', 'lucas.silva@example.com', 5)
+INSERT INTO Clientes VALUES ('Juliana Almeida', 'F', 'juliana.almeida@example.com', 6)
+INSERT INTO Clientes VALUES ('Marcos Oliveira', 'M', 'marcos.oliveira@example.com', 7)
+INSERT INTO Clientes VALUES ('Vivian Sousa', 'F', 'vivian.sousa@example.com', 8)
+INSERT INTO Clientes VALUES ('Raul Gomes', 'M', 'raul.gomes@example.com', 9)
+INSERT INTO Clientes VALUES ('Fátima Santos', 'F', 'fatima.santos@example.com', 10)
+go
+
+select * from clientes
+
+INSERT INTO endereco VALUES ('Centro', 'São Paulo', 'SP', 1);
+INSERT INTO endereco VALUES ('Jardins', 'Rio de Janeiro', 'RJ', 2);
+INSERT INTO endereco VALUES ('Aldeota', 'Fortaleza', 'CE', 3);
+INSERT INTO endereco VALUES ('Petrópolis', 'Porto Alegre', 'RS', 4);
+INSERT INTO endereco VALUES ('Ipanema', 'Rio de Janeiro', 'RJ', 5);
+INSERT INTO endereco VALUES ('Morumbi', 'São Paulo', 'SP', 6);
+INSERT INTO endereco VALUES ('Centro', 'Belo Horizonte', 'MG', 7);
+INSERT INTO endereco VALUES ('Boa Viagem', 'Recife', 'PE', 8);
+INSERT INTO endereco VALUES ('Batel', 'Curitiba', 'PR', 9);
+INSERT INTO endereco VALUES ('Meireles', 'Fortaleza', 'CE', 10);
+INSERT INTO endereco VALUES ('Gávea', 'Rio de Janeiro', 'RJ', 11);
+INSERT INTO endereco VALUES ('Jardim Paulista', 'São Paulo', 'SP', 12);
+INSERT INTO endereco VALUES ('Savassi', 'Belo Horizonte', 'MG', 13);
+INSERT INTO endereco VALUES ('Ponta Verde', 'Maceió', 'AL', 14);
+INSERT INTO endereco VALUES ('Cambuí', 'Campinas', 'SP', 15);
+INSERT INTO endereco VALUES ('Graças', 'Recife', 'PE', 16);
+INSERT INTO endereco VALUES ('Batel', 'Curitiba', 'PR', 17);
+INSERT INTO endereco VALUES ('Cocó', 'Fortaleza', 'CE', 18);
+INSERT INTO endereco VALUES ('Leblon', 'Rio de Janeiro', 'RJ', 19);
+INSERT INTO endereco VALUES ('Vila Olímpia', 'São Paulo', 'SP', 20);
+INSERT INTO endereco VALUES ('Centro', 'Salvador', 'BA', 21);
+INSERT INTO endereco VALUES ('Barra da Tijuca', 'Rio de Janeiro', 'RJ', 22);
+INSERT INTO endereco VALUES ('Pampulha', 'Belo Horizonte', 'MG', 23);
+INSERT INTO endereco VALUES ('Boa Viagem', 'Recife', 'PE', 24);
+INSERT INTO endereco VALUES ('Centro Cívico', 'Curitiba', 'PR', 25);
+INSERT INTO endereco VALUES ('Mucuripe', 'Fortaleza', 'CE', 26);
+INSERT INTO endereco VALUES ('Copacabana', 'Rio de Janeiro', 'RJ', 27);
+INSERT INTO endereco VALUES ('Itaim Bibi', 'São Paulo', 'SP', 28);
+INSERT INTO endereco VALUES ('Pituba', 'Salvador', 'BA', 29);
+INSERT INTO endereco VALUES ('Centro', 'Recife', 'PE', 30);
+INSERT INTO endereco VALUES ('Centro', 'Porto Alegre', 'RS', 31);
+INSERT INTO endereco VALUES ('Batel', 'Curitiba', 'PR', 32);
+INSERT INTO endereco VALUES ('Praia de Iracema', 'Fortaleza', 'CE', 33);
+INSERT INTO endereco VALUES ('Icaraí', 'Niterói', 'RJ', 34);
+INSERT INTO endereco VALUES ('Moema', 'São Paulo', 'SP', 35);
+INSERT INTO endereco VALUES ('Centro', 'Florianópolis', 'SC', 36);
+INSERT INTO endereco VALUES ('Pituba', 'Salvador', 'BA', 37);
+INSERT INTO endereco VALUES ('Pina', 'Recife', 'PE', 38);
+INSERT INTO endereco VALUES ('Batel', 'Curitiba', 'PR', 39);
+INSERT INTO endereco VALUES ('Aldeota', 'Fortaleza', 'CE', 40);
+INSERT INTO endereco VALUES ('Gávea', 'Rio de Janeiro', 'RJ', 42);
+INSERT INTO endereco VALUES ('Centro', 'São Paulo', 'SP', 43);
+INSERT INTO endereco VALUES ('Jardins', 'Rio de Janeiro', 'RJ', 44);
+INSERT INTO endereco VALUES ('Morumbi', 'São Paulo', 'SP', 45);
+INSERT INTO endereco VALUES ('Centro', 'Belo Horizonte', 'MG', 46);
+INSERT INTO endereco VALUES ('Boa Viagem', 'Recife', 'PE', 47);
+INSERT INTO endereco VALUES ('Batel', 'Curitiba', 'PR', 48);
+INSERT INTO endereco VALUES ('Meireles', 'Fortaleza', 'CE', 49);
+INSERT INTO endereco VALUES ('Jardim Paulista', 'São Paulo', 'SP', 50);
+go
+
+select * from endereco
+
+INSERT INTO TELEFONE VALUES ('119876543210', 'cel', 1)
+INSERT INTO TELEFONE VALUES ('219765432109', 'com', 2)
+INSERT INTO TELEFONE VALUES ('319654321098', 'res', 3)
+INSERT INTO TELEFONE VALUES ('419543210987', 'cel', 4)
+INSERT INTO TELEFONE VALUES ('519432109876', 'com', 5)
+INSERT INTO TELEFONE VALUES ('619321098765', 'res', 6)
+INSERT INTO TELEFONE VALUES ('719210987654', 'cel', 7)
+INSERT INTO TELEFONE VALUES ('819109876543', 'com', 8)
+INSERT INTO TELEFONE VALUES ('919098765432', 'res', 9)
+INSERT INTO TELEFONE VALUES ('101987654321', 'cel', 10)
+INSERT INTO TELEFONE VALUES ('111876543210', 'com', 11)
+INSERT INTO TELEFONE VALUES ('121765432109', 'res', 12)
+INSERT INTO TELEFONE VALUES ('131654321098', 'cel', 13)
+INSERT INTO TELEFONE VALUES ('141543210987', 'com', 14)
+INSERT INTO TELEFONE VALUES ('151432109876', 'res', 15)
+INSERT INTO TELEFONE VALUES ('161321098765', 'cel', 16)
+INSERT INTO TELEFONE VALUES ('171210987654', 'com', 17)
+INSERT INTO TELEFONE VALUES ('181109876543', 'res', 18)
+INSERT INTO TELEFONE VALUES ('191098765432', 'cel', 19)
+INSERT INTO TELEFONE VALUES ('201987654321', 'com', 20)
+INSERT INTO TELEFONE VALUES ('211876543210', 'cel', 21)
+INSERT INTO TELEFONE VALUES ('221765432109', 'com', 22)
+INSERT INTO TELEFONE VALUES ('231654321098', 'res', 23)
+INSERT INTO TELEFONE VALUES ('241543210987', 'cel', 24)
+INSERT INTO TELEFONE VALUES ('251432109876', 'com', 25)
+INSERT INTO TELEFONE VALUES ('261321098765', 'res', 26)
+INSERT INTO TELEFONE VALUES ('271210987654', 'cel', 27)
+INSERT INTO TELEFONE VALUES ('281109876543', 'com', 28)
+INSERT INTO TELEFONE VALUES ('291098765432', 'res', 29)
+INSERT INTO TELEFONE VALUES ('301987654321', 'cel', 30)
+INSERT INTO TELEFONE VALUES ('311876543210', 'com', 31)
+INSERT INTO TELEFONE VALUES ('321765432109', 'res', 32)
+INSERT INTO TELEFONE VALUES ('331654321098', 'cel', 33)
+INSERT INTO TELEFONE VALUES ('341543210987', 'com', 34)
+INSERT INTO TELEFONE VALUES ('351432109876', 'res', 35)
+INSERT INTO TELEFONE VALUES ('361321098765', 'cel', 36)
+INSERT INTO TELEFONE VALUES ('371210987654', 'com', 37)
+INSERT INTO TELEFONE VALUES ('381109876543', 'res', 38)
+INSERT INTO TELEFONE VALUES ('391098765432', 'cel', 39)
+INSERT INTO TELEFONE VALUES ('401987654321', 'com', 42)
+INSERT INTO TELEFONE VALUES ('411876543210', 'cel', 43)
+INSERT INTO TELEFONE VALUES ('421765432109', 'com', 44)
+INSERT INTO TELEFONE VALUES ('431654321098', 'res', 45)
+INSERT INTO TELEFONE VALUES ('441543210987', 'cel', 46)
+INSERT INTO TELEFONE VALUES ('451432109876', 'com', 47)
+INSERT INTO TELEFONE VALUES ('461321098765', 'res', 48)
+INSERT INTO TELEFONE VALUES ('471210987654', 'cel', 49)
+INSERT INTO TELEFONE VALUES ('481109876543', 'com', 50)
+INSERT INTO TELEFONE VALUES ('491098765432', 'res', 51)
+go
